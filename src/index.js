@@ -1,51 +1,26 @@
-const fs = require('fs');
-const inquirer = require('inquirer');
-const themeKitUtil = require('./themekit');
-const common = require('./util/common');
-const configUpdater = require('./io/configUpdater');
+#!/usr/bin/env node
 
-const isConfigDirExists = fs.existsSync(common.CONFIG_DIR_NAME);
-const isConfigFileExists = fs.existsSync(common.CONFIG_FILE_NAME);
+const program = require('commander');
+const { switchTheme, watchTheme, getTheme } = require('./commands');
 
-const start = async () => {
-  if (!isConfigDirExists) {
-    fs.mkdirSync(common.CONFIG_DIR_NAME);
-  }
+program.version('1.0.0').description('Shopify ThemeKit CLI Wrapper');
 
-  let questions = common.DEFAULT_QUESTIONS;
-  if (isConfigFileExists) {
-    const prevAnswers = JSON.parse(fs.readFileSync(common.CONFIG_FILE_NAME));
-    questions = common.DEFAULT_QUESTIONS.map(question => {
-      const prev = prevAnswers[question.name];
-      question.default = prev;
-      return question;
-    });
-  }
+program
+  .command('switch')
+  .alias('s')
+  .description('Switching the current dev theme')
+  .action(switchTheme);
 
-  const answers = await inquirer.prompt(questions);
-  fs.writeFileSync(common.CONFIG_FILE_NAME, JSON.stringify(answers));
-  console.log('One sec, fetching themes ....');
+program
+  .command('get')
+  .alias('g')
+  .description('Get a theme from shopify')
+  .action(getTheme);
 
-  const themeList = await themeKitUtil.listThemes(answers);
-  const { themeId: dirtyThemeData } = await inquirer.prompt([
-    {
-      type: 'confirm',
-      name: 'dummy',
-      message: 'Fetche themes, Ready to continue?', // Prevent accedental select
-    },
-    {
-      type: 'list',
-      name: 'themeId',
-      message: 'Which theme will you be working on today?',
-      choices: themeList,
-    },
-  ]);
+program
+  .command('dev')
+  .alias('d')
+  .description('Run theme watch')
+  .action(watchTheme);
 
-  const themeData = dirtyThemeData.split('-');
-  const themeId = themeData[0].replace('[', '').replace(']', '').trim();
-  const themeName = themeData[1].trim();
-
-  configUpdater(themeId, answers.password, answers.storeURL);
-};
-
-start();
+program.parse(process.argv);

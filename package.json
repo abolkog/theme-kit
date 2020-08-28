@@ -1,24 +1,34 @@
 {
-  "name": "theme-manager",
+  "name": "@abolkog/theme-kit",
   "version": "1.0.0",
   "description": "NodeJS Wrapper around Shopify ThemeKit",
   "main": "src/index.js",
-  "author": "Khalid Saeed <khalid.saeed@wearedigital.com.au>",
+  "author": "Khalid Saeed",
   "license": "MIT",
   "scripts": {
     "start": "node src/index"
   },
   "dependencies": {
+    "commander": "^6.1.0",
     "inquirer": "^7.3.3",
     "js-yaml": "^3.14.0"
   },
   "bin": {
-    "theme-manager": "./src/index.js"
+    "theme-kit": "./src/index.js"
   },
   "keywords": [
     "theme manger",
+    "theme kit",
     "shopify",
     "themekit",
     "cli"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abolkog/theme-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abolkog/theme-kit/issues"
+  },
+  "homepage": "https://github.com/abolkog/theme-kit"
 }

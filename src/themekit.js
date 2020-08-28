@@ -11,9 +11,8 @@ module.exports = {
    * @param {string} data.storeURL - The Shopify URL
    */
   async listThemes(data) {
-    console.log(data);
     const result = [];
-    const dirty = await executor(
+    const dirty = await executor.executeCommand(
       `theme get --list -p=${data.password} -s=${data.storeURL}`
     );
 
@@ -40,5 +39,22 @@ module.exports = {
       });
 
     return result;
+  },
+  /**
+   * Watch a theme for development
+   */
+  async watch() {
+    executor.excuteAndBindToStd(`theme watch`);
+  },
+  /**
+   * Download a theme
+   * @param {string} password - Shopify app password
+   * @param {string} storeURL - Shopify Store URL
+   * @param {string} themId - The theme id to download
+   */
+  async getTheme(password, storeURL, themeId) {
+    executor.excuteAndBindToStd(
+      `theme get -p=${password} -s=${storeURL} --themeid=${themeId}`
+    );
   },
 };
