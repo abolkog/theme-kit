@@ -1,0 +1,24 @@
+{
+  "name": "theme-manager",
+  "version": "1.0.0",
+  "description": "NodeJS Wrapper around Shopify ThemeKit",
+  "main": "src/index.js",
+  "author": "Khalid Saeed <khalid.saeed@wearedigital.com.au>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index"
+  },
+  "dependencies": {
+    "inquirer": "^7.3.3",
+    "js-yaml": "^3.14.0"
+  },
+  "bin": {
+    "theme-manager": "./src/index.js"
+  },
+  "keywords": [
+    "theme manger",
+    "shopify",
+    "themekit",
+    "cli"
+  ]
+}
