@@ -1,5 +1,9 @@
 # Theme-Kit
 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/abolkog/theme-kit)
+![](https://img.shields.io/github/license/abolkog/theme-kit.svg)
+
+
 A NoeJS CLI Wrapper around [Shopify ThemeKit](https://shopify.github.io/themekit/)
 
 > Currently Working with bare liquid themes
@@ -24,6 +28,12 @@ theme-kit is a cli wrapper around shopify themekit, you can use it to switch the
 
 > This wrapper will created a file `.werd` on the root level to store your configutation. Add this file to your `.gitignore`
 
+| Command |  Summary  |  
+|---|---|
+| [get](#downlaod-theme)  |  Download a theme  | 
+| [switch](#switch-theme)  | Change the current working theme  |  
+| [dev](#watch-theme)  | Start themekit watch for development  | 
+
 ### Downlaod theme
 
 Navigate to a new folder and use the command `get` to download a theme
@@ -35,9 +45,9 @@ theme-kit get
 
 follow the on-screen instruction
 
-### Watch theme
+### Switch theme
 
-Navigate to your them working and issue the commadn `switch`
+You can use the `switch` command to change between the current working theme. Navigate to your theme working directory and issue the commadn `switch`
 
 > the `config.yml` file must exists in the root folder
 
